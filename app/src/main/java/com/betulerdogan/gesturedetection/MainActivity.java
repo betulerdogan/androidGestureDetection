@@ -30,30 +30,34 @@ public class MainActivity extends AppCompatActivity {
         private float flingMin=100;
         private float velocityMin=100;
 
+        //Kullanıcı yukarı veya sola doğru mesajlar arasında ilerleyebilecek.
         boolean forward=false;
+        //Kullanıcı aşağı veya sağa doğru mesajlar arasında ilerleyebilecek.
         boolean backward=false;
 
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
-            System.out.println("On Single Tap Up");
+            System.out.println("Tek Tıklama");
             return super.onSingleTapUp(e);
         }
 
         @Override
         public void onLongPress(MotionEvent e) {
-            System.out.println("On Long Press");
+            System.out.println("Uzun Tıklama");
             super.onLongPress(e);
         }
 
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            System.out.println("Scrolling");
+            System.out.println("Kaydırma");
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            //kaydırma hareketindeki x pozisyonundaki değişimi hesapla
             float horizontalDiff = e2.getX() - e1.getX();
+            //kaydırma hareketindeki y pozisyonundaki değişimi hesapla
             float verticalDiff = e2.getY() - e1.getY();
 
             float absHDiff = Math.abs(horizontalDiff);
@@ -62,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             float absVelocityY = Math.abs(velocityY);
 
             if (absHDiff > absVDiff && absHDiff > flingMin && absVelocityX > velocityMin) {
-
+                //ileri veya geriye hareket et
                 if (horizontalDiff > 0) {
                     backward = true;
                 } else if (absVDiff > flingMin && absVelocityY > velocityMin) {
@@ -73,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
+            //ileriye doğru mesajlarda dolaş
             if (forward) {
-                System.out.println("user is cycling forward through messages");
+                System.out.println("kullanıcı ileriye doğru mesajlarda dolaşıyor");
             }
-
+            //geriye doğru dolaş
             else if (backward) {
-                System.out.println("user is cycling backwards through messages");
+                System.out.println("kullanıcı geriye doğru mesajlarda dolaşıyor");
             }
 
             return true;
@@ -88,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onDown(MotionEvent e) {
-            System.out.println("On Down");
+            System.out.println("Aşağı");
             return super.onDown(e);
         }
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            System.out.println("On Double Tap");
+            System.out.println("Çift Tıklama");
             return super.onDoubleTap(e);
         }
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            System.out.println("On Single Tap");
+            System.out.println("Tek Tıklama");
             return super.onSingleTapConfirmed(e);
         }
     }
